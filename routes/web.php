@@ -21,10 +21,16 @@ Route::get('/tests/test', [TestController::class, 'index']);
 
 Route::prefix('contacts')
     ->middleware(['auth'])
+    ->controller(ContactFormController::class)
     ->name('contacts.')
     ->group(function () {
-        Route::get('/', [ContactFormController::class, 'index'])->name('index');
-        Route::get('/create', [ContactFormController::class, 'create'])->name('create');
+        Route::get('/', 'index')->name('index');
+        Route::get('/create',  'create')->name('create');
+        Route::post('/',  'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::post('/{id}', 'update')->name('update');
+        Route::post('/{id}/destroy', 'destroy')->name('destroy');
     });
 
 Route::get('/', function () {
