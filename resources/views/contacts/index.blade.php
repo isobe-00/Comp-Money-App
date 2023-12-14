@@ -10,7 +10,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     index<br>
-                    <a href="{{ route('contacts.create') }}" class="text-blue-500">新規登録</a>
+                    <a href="{{ route('contacts.create') }}" class="text-blue-500">新規登録</a><br>
+                    <form class="mb-8" method="get" action="{{ route('contacts.index')}}">
+                    <input type="text" name="search"  placeholder="検索">
+                    <button >検索する</button>
+                    </form>
 
                     <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                         <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -24,7 +28,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($Contact as $contact)
+                                @foreach($contacts as $contact)
                                 <tr>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->id}}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->name}}</td>
@@ -36,7 +40,7 @@
                             </tbody>
                         </table>
                     </div>
-
+                    {{ $contacts->links() }}
                 </div>
             </div>
         </div>

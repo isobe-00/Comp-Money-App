@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Area;
+use App\Models\Route;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            TestSeeder::class,
+            UserSeeder::class,
+            AreaSeeder::class,
+            ShopSeeder::class,
+            RouteSeeder::class,
+            RouteShopSeeder::class
+
+        ]);
+
+    \App\Models\ContactForm::factory(100)->create();
     }
 }

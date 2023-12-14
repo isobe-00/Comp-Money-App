@@ -6,19 +6,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTextToTestsTable extends Migration
+// 2023_12_11_164331_add_another_text_to_tests_table.php
+class AddAnotherTextToTestsTable extends Migration
 {
     public function up()
     {
         Schema::table('tests', function (Blueprint $table) {
-            $table->text('text')->after('id'); // 'text' カラムを 'id' カラムの後に追加
+            $table->text('another_text')->after('id');
         });
     }
 
     public function down()
     {
         Schema::table('tests', function (Blueprint $table) {
-            $table->dropColumn('text');
+            $table->dropColumn('another_text');
         });
     }
 }
