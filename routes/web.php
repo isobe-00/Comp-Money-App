@@ -29,23 +29,25 @@ use App\http\Controllers\TransactionController;
 // 
 
 
-Route::prefix('/contacts')
+Route::prefix('/transactions')
     ->middleware(['auth'])
-    ->controller(TransactionController::class)
-    ->name('contacts.')
     ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create',  'create')->name('create');
-        Route::post('/',  'store')->name('store');
-        Route::get('/{id}', 'show')->name('show');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::post('/{id}', 'update')->name('update');
-        Route::post('/{id}/destroy', 'destroy')->name('destroy');
-
-        // Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
-
+        Route::get('/', [TransactionController::class, 'index'])->name('transactions.index');
+        Route::post('/create',  [TransactionController::class, 'create'])->name('transactions.create');
+        Route::post('/',  [TransactionController::class, 'store'])->name('transactions.store');
+        Route::get('/{id}', [TransactionController::class, 'show'])->name('transactions.show');
+        Route::get('/{id}/edit', [TransactionController::class, 'edit'])->name('transactions.edit');
+        Route::post('/{id}', [TransactionController::class, 'update'])->name('transactions.update');
+        Route::post('/{id}/destroy', [TransactionController::class, 'destroy'])->name('transactions.destroy');
     });
 
+    Route::prefix('contacts')
+    ->middleware(['auth'])
+    ->name('contacts.')
+    ->group(function () {
+        Route::get('/', [ContactFormController::class, 'index'])->name('index');
+        Route::get('/create', [ContactFormController::class, 'create'])->name('create');
+    });
 // routes/web.php
 
 

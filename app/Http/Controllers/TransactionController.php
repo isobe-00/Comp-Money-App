@@ -17,11 +17,12 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
+
         //  dd($request->all());
 
         // 新規作成フォーム表示
         //トランザクションをデータベースに保存
-        Transaction::create([
+       Transaction::create([
             'category_id' => $request->category_id,  // カテゴリーID
             'amount' => $request->amount,            // 金額
             'type' => $request->type,                // 収入か支出かを表すタイプ
@@ -35,6 +36,7 @@ class TransactionController extends Controller
 
     public function update(Request $request, $id)
     {
+        var_dump($request);
         $transactions = Transaction::find($id);
         $transactions->memo = $request->memo;
         $transactions->save();
@@ -43,7 +45,12 @@ class TransactionController extends Controller
     }
     public function index()
     {
-        $transactions = Transaction::all();
+        // 1ページあたりの表示件数を指定
+        $perPage = 20;
+
+        // モデルからデータを取得し、ページネーションを適用
+        $transactions = Transaction::paginate($perPage);
+
         return view('contacts.index', ['transactions' => $transactions]);
     }
 }

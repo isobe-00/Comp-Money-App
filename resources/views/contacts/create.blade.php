@@ -40,8 +40,8 @@
                                                 <label for="type" class="leading-7 text-sm text-gray-600">収支種別</label>
                                                 <select name="type">
                                                         <option value="">選択してください</option>
-                                                        <option value="1" {{ old('type') == 1 ? 'selected' : ''}}>収入</option>
-                                                        <option value="2" {{ old('type') == 2 ? 'selected' : ''}}>支出</option>
+                                                        <option value="1" {{ old('type') == 1 ? 0 : ''}}>収入</option>
+                                                        <option value="2" {{ old('type') == 2 ? 1 : ''}}>支出</option>
                                                         <div>
                                             </div>
                                         </div>
@@ -59,7 +59,7 @@
                                                 <textarea id="memo" name="memo" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('contact') }}</textarea>
                                             </div>
                                         </div>
-                                        <!-- 送信ボタン -->
+                                        <!-- 新規登録ボタン -->
                                         <div class="p-2 w-full">
                                             <button class="flex mx-auto ">新規登録する</button>
                                         </div>
@@ -73,3 +73,6 @@
         </div>
     </div>
 </x-app-layout>
+
+
+    
