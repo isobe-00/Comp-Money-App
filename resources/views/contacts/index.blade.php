@@ -3,7 +3,7 @@
     <!-- ヘッダースロットにページタイトルを含む -->
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            家計簿一覧 <!-- お問い合わせ一覧ページのタイトル -->
+            会員一覧 <!-- お問い合わせ一覧ページのタイトル -->
         </h2>
     </x-slot>
 
@@ -30,37 +30,36 @@
                                 <!-- テーブルヘッダー行 -->
                                 <tr>
                                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Id</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">カテゴリID</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">金額</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">収支種別</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">日付</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メモ</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">名前</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">件名</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メールアドレス</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">URL</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">性別</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">年齢</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">お問い合わせ内容</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">登録日</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- お問い合わせの各行を表示 -->
-                                $transactions = [];
-                                @foreach($transactions as $transaction)
+                                @foreach($contacts as $contact)
                                 <tr>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$transaction->id}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$transaction->category_id}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$transaction->amount}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">
-                                        @if($transaction->type === 0)
-                                        収入
-                                        @elseif($transaction->type === 1)
-                                        支出
-                                        @endif
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3 ">{{$transaction->created_at}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$transaction->memo}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->id}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->name}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->title}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->email}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->url}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->gender}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->age}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->contact}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3 ">{{$contact->created_at}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <!-- ページネーションを表示 -->
-                    {{ $transactions->links() }}
+                    {{ $contacts->links() }}
                 </div>
             </div>
         </div>

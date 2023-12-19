@@ -10,7 +10,7 @@ class TransactionController extends Controller
 
     public function create()
     {
-        return view('contacts.create');
+        return view('transactions.create');
         // view関数を使って、transactions.createというビューを表示
     }
 
@@ -51,6 +51,6 @@ class TransactionController extends Controller
         // モデルからデータを取得し、ページネーションを適用
         $transactions = Transaction::paginate($perPage);
 
-        return view('contacts.index', ['transactions' => $transactions]);
+        return view('transactions.index', ['transactions' => $transactions]);
     }
 }
