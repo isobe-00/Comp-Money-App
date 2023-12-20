@@ -10,77 +10,90 @@ use App\Http\Requests\StoreContactRequest;
 class ContactFormController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * リソースの一覧を表示します。
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        // $Contact = ContactForm::select('id', 'name', 'title', 'created_at')
-        //     ->get();
 
-
-        // ぺジネーション
-        // $contacts = ContactForm::select('id', 'name', 'title', 'created_at')
-        //     ->paginate(20);
-
-        // 検索対応
+        // 検索機能の対応
         $search = $request->search;
         $query = ContactForm::search($search);
-
         $contacts = $query->select('id', 'name', 'title', 'created_at')
             ->paginate(20);
-
 
         return view('contacts.index', compact('contacts'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 新しいリソースの作成フォームを表示します。
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('contacts.create');
+        // フォームから送信されたデータの取得
+        $data = $request->all();
+    
+        // ContactForm モデルを使用してデータを保存
+        ContactForm::create([
+            'name' => $data['name'],
+            'title' => $data['title'],
+            'email' => $data['email'],
+            'url' => $data['url'],
+            'gender' => $data['gender'],
+            'age' => $data['age'],
+            'contact' => $data['contact'],
+        ]);
+    
+        // データ保存後、一覧画面にリダイレクト
+        return redirect()->route('contacts.index');
+        
     }
+    
 
     /**
-     * Store a newly created resource in storage.
+     * 新しく作成されたリソースを保存します。
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreContactRequest $request)
-    {
-        //  dd($request->all());
 
-        ContactForm::create([
-            'name' => $request->name,
-            'title' => $request->title,
-            'email' => $request->email,
-            'url' => $request->url,
-            'gender' => $request->gender,
-            'age' => $request->age,
-            'contact' => $request->contact,
-        ]);
-        return to_route('contacts.index');
-    }
+     public function store(Request $request)
+     {
+    //  dd($request->all());
+         // dd($request->memo);
+         // 新規作成フォーム表示
+         //トランザクションをデータベースに保存
+         ContactForm::create([
+             'name' => $request->name,  
+             'title' => $request->title,           
+             'email' => $request->email,                
+             'url' => $request->url,  
+             'gender' => $request->gender,                
+             'age' => $request->age,                
+             'contact' => $request->contact,                
 
+         ]);
+         return redirect()->route('contacts.index');
+     }
+ 
     /**
-     * Display the specified resource.
+     * 指定されたリソースを表示します。
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+
         $contact = ContactForm::find($id);
 
+
+        // CheckFormServices を使用して性別と年齢を取得
         $gender = CheckFormServices::checkGender($contact);
-
         $age = CheckFormServices::checkAge($contact);
-
 
         return view(
             'contacts.show',
@@ -89,7 +102,7 @@ class ContactFormController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 指定されたリソースの編集フォームを表示します。
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -102,7 +115,7 @@ class ContactFormController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 指定されたリソースを更新します。
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -110,9 +123,10 @@ class ContactFormController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
+        // 指定された ID の ContactForm を取得
         $contact = ContactForm::find($id);
+
+        // フォームからのデータでリソースを更新
         $contact->name = $request->name;
         $contact->title = $request->title;
         $contact->email = $request->email;
@@ -122,20 +136,23 @@ class ContactFormController extends Controller
         $contact->contact = $request->contact;
         $contact->save();
 
-        return to_route('contacts.index');
+        // 一覧画面にリダイレクト
+        return redirect()->route('contacts.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 指定されたリソースを削除します。
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        // 指定された ID の ContactForm を取得して削除
         $contact = ContactForm::find($id);
         $contact->delete();
 
-        return to_route('contacts.index');
+        // 一覧画面にリダイレクト
+        return redirect()->route('contacts.index');
     }
 }

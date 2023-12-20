@@ -3,7 +3,7 @@
     <!-- ヘッダースロットにページタイトルを含む -->
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            会員一覧 <!-- お問い合わせ一覧ページのタイトル -->
+            会員一覧 <!-- ページのタイトル -->
         </h2>
     </x-slot>
 
@@ -14,6 +14,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     index<br>
+
                     <!-- 新しいお問い合わせを作成するリンク -->
                     <a href="{{ route('contacts.create') }}" class="text-blue-500">新規登録</a><br>
 
@@ -32,12 +33,8 @@
                                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Id</th>
                                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">名前</th>
                                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">件名</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メールアドレス</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">URL</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">性別</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">年齢</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">お問い合わせ内容</th>
                                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">登録日</th>
+                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">詳細</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,17 +44,15 @@
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->id}}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->name}}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->title}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->email}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->url}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->gender}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->age}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->contact}}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3 ">{{$contact->created_at}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">
+                                        <a class="text-blue-500" href="{{ route('contacts.show', ['id' => $contact->id]) }}">詳細を表示</a>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+
                     <!-- ページネーションを表示 -->
                     {{ $contacts->links() }}
                 </div>

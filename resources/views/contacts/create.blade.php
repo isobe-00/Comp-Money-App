@@ -2,7 +2,7 @@
     <x-slot name="header">
         <!-- ページのタイトル -->
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            家計簿アプリ
+            会員登録入力
         </h2>
     </x-slot>
 
@@ -14,52 +14,70 @@
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     <section class="text-gray-600 body-font relative">
                         <!-- お問い合わせフォーム -->
-                        <form method="post" action="{{ route('transactions.store') }}">
+                        <form method="post" action="{{ route('contacts.store') }}">
                             @csrf
                             <div class="container px-5 mx-auto">
 
                                 <div class="lg:w-1/2 md:w-2/3 mx-auto">
                                     <div class="flex flex-col space-y-4">
-                                        <!-- カテゴリIDの入力フィールド -->
+                                        <!-- 名前の入力フィールド -->
                                         <div class="mt-4">
                                             <div class="relative">
-                                                <label for="category_id" class="leading-7 text-sm text-gray-600">カテゴリID</label>
-                                                <input type="text" id="category_id" name="category_id" value="{{ old('category_id') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                <label for="name" class="leading-7 text-sm text-gray-600">名前</label>
+                                                <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 contact-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
-                                        <!-- 金額の入力フィールド -->
+                                        <!-- 件名の入力フィールド -->
                                         <div class="mt-4">
                                             <div class="relative">
-                                                <label for="amount" class="leading-7 text-sm text-gray-600">金額</label>
-                                                <input type="text" id="amount" name="amount" value="{{ old('amount') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                <label for="title" class="leading-7 text-sm text-gray-600">件名</label>
+                                                <input type="text" id="title" name="title" value="{{ old('title') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 contact-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
-                                        <!-- 収支種別の入力フィールド -->
+                                        <!-- メールアドレスの入力フィールド -->
                                         <div class="mt-4">
                                             <div class="relative">
-                                                <label for="type" class="leading-7 text-sm text-gray-600">収支種別</label>
-                                                <select name="type">
-                                                        <option value="">選択してください</option>
-                                                        <option value="1" {{ old('type') == 1 ? 0 : ''}}>収入</option>
-                                                        <option value="2" {{ old('type') == 2 ? 1 : ''}}>支出</option>
-                                                        <div>
+                                                <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
+                                                <input type="text" id="email" name="email" value="{{ old('email') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 contact-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
-                                        <!-- 日付の入力フィールド -->
+                                        <!-- URLの入力フィールド -->
                                         <div class="mt-4">
                                             <div class="relative">
-                                                <label for="transaction_date" class="leading-7 text-sm text-gray-600">日付</label>
-                                                <input type="date" id="transaction_date" name="transaction_date" value="{{ old('transaction_date') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                <label for="url" class="leading-7 text-sm text-gray-600">URL</label>
+                                                <input type="text" id="url" name="url" value="{{ old('url') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 contact-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
-                                        <!-- メモの入力フィールド -->
+                                        <!-- 性別の入力フィールド -->
                                         <div class="mt-4">
                                             <div class="relative">
-                                                <label for="memo" class="leading-7 text-sm text-gray-600">メモ</label>
-                                                <textarea id="memo" name="memo" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('contact') }}</textarea>
+                                                <label for="gender" class="leading-7 text-sm text-gray-600">性別</label><br>
+                                                <input type="radio" name="gender" value="0" >男性
+                                                <input type="radio" name="gender" value="1" >女性
                                             </div>
                                         </div>
-                                        <!-- 新規登録ボタン -->
+                                        <!-- 年齢の入力フィールド -->
+                                        <div class="mt-4">
+                                            <div class="relative">
+                                                <label for="age" class="leading-7 text-sm text-gray-600">年齢</label>
+                                                <select name="age" class="w-1/3 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 contact-colors duration-200 ease-in-out">
+                                                    <option value="">選択してください</option>
+                                                    <option value="1">～19歳</option>
+                                                    <option value="2">20歳～29歳</option>
+                                                    <option value="3">30歳～39歳</option>
+                                                    <option value="4">40歳～49歳</option>
+                                                    <option value="5">50歳～59歳</option>
+                                                    <option value="6">60歳～</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- お問い合わせ内容の入力フィールド -->
+                                        <div class="mt-4">
+                                            <div class="relative">
+                                                <label for="contact" class="leading-7 text-sm text-gray-600">お問い合わせ内容</label>
+                                                <textarea id="contact" name="contact" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 contact-colors duration-200 ease-in-out">{{ old('contact') }}</textarea>
+                                            </div>
+                                        </div> <!-- 新規登録ボタン -->
                                         <div class="p-2 w-full">
                                             <button class="flex mx-auto ">新規登録する</button>
                                         </div>
@@ -73,6 +91,3 @@
         </div>
     </div>
 </x-app-layout>
-
-
-    
