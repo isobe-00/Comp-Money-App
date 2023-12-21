@@ -21,6 +21,8 @@ return new class extends Migration
             $table->date('transaction_date'); // 日付　年-月-日の形式で日付を保存可
             $table->text('memo')->nullable(); // メモ　`nullable` 必須ではなく、空白でもok
             $table->timestamps(); // 作成日時と更新日時
+
+            $table->unsignedBigInteger('user_id');
         });
         
 

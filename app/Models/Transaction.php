@@ -21,4 +21,11 @@ class Transaction extends Model
         'transaction_date',    // 取引日付
         'memo',                // メモ
     ];
+
+    public function contactForm()
+    {
+        return $this->belongsTo(ContactForm::class);
+    }
+
+
 }

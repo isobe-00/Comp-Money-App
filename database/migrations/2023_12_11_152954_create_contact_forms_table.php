@@ -22,6 +22,10 @@ return new class extends Migration
             $table->tinyInteger('age');
             $table->string('contact', 200);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('contact_forms')->onDelete('cascade');
+    
+
         });
     }
 

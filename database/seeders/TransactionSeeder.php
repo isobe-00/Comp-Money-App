@@ -22,5 +22,7 @@ class TransactionSeeder extends Seeder
         Transaction::factory(100)->create([
             'type' => 1, // 支出
         ]);
+     }
+
+        
     }
-}

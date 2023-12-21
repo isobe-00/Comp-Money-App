@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             // AreaSeeder::class,
             // ShopSeeder::class,
             // RouteSeeder::class,
-            // RouteShopSeeder::class
+            // RouteShopSeeder::class,
+            ContactFormSeeder::class,   
             TransactionSeeder::class
 
         ]);

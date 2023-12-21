@@ -17,8 +17,12 @@
                     <!-- 取引一覧へのリンク -->
                     <a href="{{ route('transactions.index') }}" class="text-blue-500 hover:underline">取引一覧</a><br>
 
+                    <!-- 新規会員登録画面へのリンク -->
                     <a href="{{ route('contacts.create') }}" class="text-blue-500 hover:underline">新規会員登録</a><br>
+
+                    <!-- 新規取引登録画面へのリンク -->
                     <a href="{{ route('transactions.create') }}" class="text-blue-500 hover:underline">新規取引登録</a><br>
+
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
+
 class TransactionController extends Controller
 {
 
@@ -60,12 +61,15 @@ class TransactionController extends Controller
         ]);
         return redirect()->route('transactions.index');
     }
-    
 
+    
     public function update(Request $request, $id)
     {
         $transactions = Transaction::find($id);
-
+        $transactions->category_id = $request->category_id;
+        $transactions->amount = $request->amount;
+        $transactions->type = $request->type;
+        $transactions->transaction_date = $request->transaction_date;
         $transactions->memo = $request->memo;
         $transactions->save();
 
@@ -79,10 +83,20 @@ class TransactionController extends Controller
 
         // モデルからデータを取得し、ページネーションを適用
         $transactions = Transaction::paginate($perPage);
+        
 
         return view('transactions.index', ['transactions' => $transactions]);
     }
 
+
+
+
+
+
+
+
+
+    
 
 
 public function edit($id)
@@ -90,5 +104,20 @@ public function edit($id)
     $transaction = Transaction::find($id);
 
     return view('transactions.edit', compact('transaction'));
+}
+
+    /**
+     * 指定されたリソースを削除します。
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+{
+    $transaction = Transaction::find($id);
+    $transaction->delete();
+
+    // 一覧画面にリダイレクト
+    return redirect()->route('transactions.index');
 }
 }

@@ -26,6 +26,7 @@ class ContactFormController extends Controller
         return view('contacts.index', compact('contacts'));
     }
 
+
     /**
      * 新しいリソースの作成フォームを表示します。
      *
@@ -33,22 +34,22 @@ class ContactFormController extends Controller
      */
     public function create(Request $request)
     {
-        // フォームから送信されたデータの取得
-        $data = $request->all();
+        // // フォームから送信されたデータの取得
+        // $data = $request->all();
     
-        // ContactForm モデルを使用してデータを保存
-        ContactForm::create([
-            'name' => $data['name'],
-            'title' => $data['title'],
-            'email' => $data['email'],
-            'url' => $data['url'],
-            'gender' => $data['gender'],
-            'age' => $data['age'],
-            'contact' => $data['contact'],
-        ]);
+        // // ContactForm モデルを使用してデータを保存
+        // ContactForm::create([
+        //     'name' => $data['name'],
+        //     'title' => $data['title'],
+        //     'email' => $data['email'],
+        //     'url' => $data['url'],
+        //     'gender' => $data['gender'],
+        //     'age' => $data['age'],
+        //     'contact' => $data['contact'],
+        // ]);
     
         // データ保存後、一覧画面にリダイレクト
-        return redirect()->route('contacts.index');
+        return view('contacts.create')->with('message', 'データが保存されました。');
         
     }
     
@@ -137,7 +138,7 @@ class ContactFormController extends Controller
         $contact->save();
 
         // 一覧画面にリダイレクト
-        return redirect()->route('contacts.index');
+        return redirect()->route('contacts.index', ['id' => $id]);
     }
 
     /**

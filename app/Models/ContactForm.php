@@ -30,4 +30,11 @@ class ContactForm extends Model
         }
         return $query;
     }
+
+    
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

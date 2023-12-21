@@ -24,6 +24,8 @@
                          <button>検索する</button> <!-- 検索ボタン -->
                      </form>
 
+                     
+
                      <!-- お問い合わせのテーブルを表示 -->
                      <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                          <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -55,7 +57,7 @@
                                          @endif
                                      </td>
                                      <td class="border-t-2 border-gray-200 px-4 py-3 ">{{$transaction->created_at}}</td>
-                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$transaction->memo ?? 'test'}}</td>                                                                               }}</td>
+                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$transaction->memo ?? 'test'}}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">
                                         <a class="text-blue-500" href="{{ route('transactions.show', ['id' => $transaction->id]) }}">詳細を表示</a>
                                  </tr>
