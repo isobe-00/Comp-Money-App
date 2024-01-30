@@ -33,13 +33,11 @@ class TransactionController extends Controller
     public function show($id)
     {
 
+        // 指定された ID のトランザクションを取得
         $transaction = Transaction::find($id);
 
-
-        return view(
-            'transactions.show',
-            compact('transaction')
-        );
+        // 取引詳細ビューを表示
+        return view('transactions.show',compact('transaction'));
     }
 
 
@@ -47,7 +45,7 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-   //  dd($request->all());
+        //  dd($request->all());
         // dd($request->memo);
         // 新規作成フォーム表示
         //トランザクションをデータベースに保存
@@ -57,23 +55,30 @@ class TransactionController extends Controller
             'type' => $request->type,                // 収入か支出かを表すタイプ
             'transaction_date' => $request->transaction_date,  // トランザクションの日付
             'memo' => $request->memo,                // メモ
-            
+
         ]);
+        // 一覧画面にリダイレクト
         return redirect()->route('transactions.index');
     }
 
-    
+
     public function update(Request $request, $id)
     {
+
+        // 指定された ID のトランザクションを取得
         $transactions = Transaction::find($id);
+        
+        // トランザクションの各フィールドを更新
         $transactions->category_id = $request->category_id;
         $transactions->amount = $request->amount;
         $transactions->type = $request->type;
         $transactions->transaction_date = $request->transaction_date;
         $transactions->memo = $request->memo;
+
         $transactions->save();
 
-        return redirect()->route('transactions.index', ['id' => $id]);    
+        // 一覧画面にリダイレクト
+        return redirect()->route('transactions.index', ['id' => $id]);
     }
 
     public function index()
@@ -83,28 +88,20 @@ class TransactionController extends Controller
 
         // モデルからデータを取得し、ページネーションを適用
         $transactions = Transaction::paginate($perPage);
-        
 
+        // 取引一覧ビューを表示
         return view('transactions.index', ['transactions' => $transactions]);
     }
 
 
+    public function edit($id)
+    {
+        // 指定された ID のトランザクションを取得
+        $transaction = Transaction::find($id);
 
-
-
-
-
-
-
-    
-
-
-public function edit($id)
-{
-    $transaction = Transaction::find($id);
-
-    return view('transactions.edit', compact('transaction'));
-}
+        // トランザクション編集ビューを表示
+        return view('transactions.edit', compact('transaction'));
+    }
 
     /**
      * 指定されたリソースを削除します。
@@ -113,11 +110,12 @@ public function edit($id)
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-{
-    $transaction = Transaction::find($id);
-    $transaction->delete();
+    {
+        // 指定された ID のトランザクションを取得し、削除
+        $transaction = Transaction::find($id);
+        $transaction->delete();
 
-    // 一覧画面にリダイレクト
-    return redirect()->route('transactions.index');
-}
+        // 一覧画面にリダイレクト
+        return redirect()->route('transactions.index');
+    }
 }

@@ -13,18 +13,16 @@
             <!-- 影と角丸のあるメインコンテンツのコンテナ -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    index<br>
+                    <br>
 
                     <!-- 新しいお問い合わせを作成するリンク -->
-                    <a href="{{ route('contacts.create') }}" class="text-blue-500">新規登録</a><br>
+                    <a href="{{ route('contacts.create') }}" class="text-blue-500">新規登録<br></a><br>
 
                     <!-- お問い合わせを検索するためのフォーム -->
                     <form class="mb-8" method="get" action="{{ route('contacts.index')}}">
                         <input type="text" name="search" placeholder="検索"> <!-- 検索入力フィールド -->
                         <button>検索する</button> <!-- 検索ボタン -->
                     </form>
-
-                    
 
                     <!-- お問い合わせのテーブルを表示 -->
                     <div class="lg:w-2/3 w-full mx-auto overflow-auto">
@@ -46,9 +44,10 @@
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->id}}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->name}}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->title}}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3 ">{{$contact->created_at}}</td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{$contact->created_at}}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">
                                         <a class="text-blue-500" href="{{ route('contacts.show', ['id' => $contact->id]) }}">詳細を表示</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

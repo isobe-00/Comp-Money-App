@@ -1,13 +1,17 @@
+<!-- アプリケーションの外部レイアウト -->
 <x-app-layout>
+    <!-- ヘッダースロットにページタイトルを含む -->
     <x-slot name="header">
         <!-- ページのタイトル -->
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        収支入力
+            収支入力
         </h2>
     </x-slot>
 
+    <!-- メインコンテンツセクション -->
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <!-- 影と角丸のあるメインコンテンツのコンテナ -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- フォームのセクション -->
@@ -38,11 +42,11 @@
                                         <div class="mt-4">
                                             <div class="relative">
                                                 <label for="type" class="leading-7 text-sm text-gray-600">収支種別</label>
-                                                <select name="type">
-                                                        <option value="">選択してください</option>
-                                                        <option value="1" {{ old('type') == 1 ? 0 : ''}}>収入</option>
-                                                        <option value="2" {{ old('type') == 2 ? 1 : ''}}>支出</option>
-                                                        <div>
+                                                <select name="type" class="w-1/3 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 contact-colors duration-200 ease-in-out">
+                                                    <option value="">選択してください</option>
+                                                    <option value="1">収入</option>
+                                                    <option value="2">支出</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <!-- 日付の入力フィールド -->
@@ -73,6 +77,3 @@
         </div>
     </div>
 </x-app-layout>
-
-
-    

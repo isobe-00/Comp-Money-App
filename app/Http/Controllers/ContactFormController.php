@@ -23,6 +23,7 @@ class ContactFormController extends Controller
         $contacts = $query->select('id', 'name', 'title', 'created_at')
             ->paginate(20);
 
+        // データ保存後、一覧画面にリダイレクト
         return view('contacts.index', compact('contacts'));
     }
 
@@ -36,7 +37,7 @@ class ContactFormController extends Controller
     {
         // // フォームから送信されたデータの取得
         // $data = $request->all();
-    
+
         // // ContactForm モデルを使用してデータを保存
         // ContactForm::create([
         //     'name' => $data['name'],
@@ -47,12 +48,11 @@ class ContactFormController extends Controller
         //     'age' => $data['age'],
         //     'contact' => $data['contact'],
         // ]);
-    
+
         // データ保存後、一覧画面にリダイレクト
         return view('contacts.create')->with('message', 'データが保存されました。');
-        
     }
-    
+
 
     /**
      * 新しく作成されたリソースを保存します。
@@ -61,25 +61,26 @@ class ContactFormController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function store(Request $request)
-     {
-    //  dd($request->all());
-         // dd($request->memo);
-         // 新規作成フォーム表示
-         //トランザクションをデータベースに保存
-         ContactForm::create([
-             'name' => $request->name,  
-             'title' => $request->title,           
-             'email' => $request->email,                
-             'url' => $request->url,  
-             'gender' => $request->gender,                
-             'age' => $request->age,                
-             'contact' => $request->contact,                
+    public function store(Request $request)
+    {
 
-         ]);
-         return redirect()->route('contacts.index');
-     }
- 
+        // 新規作成フォーム表示
+        // トランザクションをデータベースに保存
+        ContactForm::create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'email' => $request->email,
+            'url' => $request->url,
+            'gender' => $request->gender,
+            'age' => $request->age,
+            'contact' => $request->contact,
+
+        ]);
+
+        // 一覧画面にリダイレクト
+        return redirect()->route('contacts.index');
+    }
+
     /**
      * 指定されたリソースを表示します。
      *
@@ -88,14 +89,14 @@ class ContactFormController extends Controller
      */
     public function show($id)
     {
-
+        // 指定された ID に対応する ContactForm レコードを取得
         $contact = ContactForm::find($id);
-
 
         // CheckFormServices を使用して性別と年齢を取得
         $gender = CheckFormServices::checkGender($contact);
         $age = CheckFormServices::checkAge($contact);
 
+        // 'contacts.show' ビューに ContactForm、性別、年齢を渡して表示
         return view(
             'contacts.show',
             compact('contact', 'gender', 'age')
@@ -110,8 +111,10 @@ class ContactFormController extends Controller
      */
     public function edit($id)
     {
+        // 指定された ID に対応する ContactForm レコードを取得
         $contact = ContactForm::find($id);
 
+        // 'contacts.edit' ビューに ContactForm を渡して表示
         return view('contacts.edit', compact('contact'));
     }
 

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('contact_forms', function (Blueprint $table) {
             $table->id();
             $table->string('name', 20);
+            $table->string('title')->nullable();
             $table->string('email', 255);
             $table->longText('url')->nullable();
             $table->boolean('gender');
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->string('contact', 200);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('contact_forms')->onDelete('cascade');
     
 
         });

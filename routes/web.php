@@ -51,7 +51,7 @@ Route::prefix('/transactions')
 
     });
 
-
+ // ウェルカムページの表示
 Route::get('/', function () {
     return view('welcome');
 });

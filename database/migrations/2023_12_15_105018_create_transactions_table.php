@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('memo')->nullable(); // メモ　`nullable` 必須ではなく、空白でもok
             $table->timestamps(); // 作成日時と更新日時
 
-            $table->unsignedBigInteger('user_id');
+
         });
         
 

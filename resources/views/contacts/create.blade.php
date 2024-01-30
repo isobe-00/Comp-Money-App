@@ -78,7 +78,8 @@
                                                 <label for="contact" class="leading-7 text-sm text-gray-600">お問い合わせ内容</label>
                                                 <textarea id="contact" name="contact" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 contact-colors duration-200 ease-in-out">{{ old('contact') }}</textarea>
                                             </div>
-                                        </div> <!-- 新規登録ボタン -->
+                                        </div>
+                                        <!-- 新規登録ボタン -->
                                         <div class="p-2 w-full">
                                             <button class="flex mx-auto ">新規登録する</button>
                                         </div>

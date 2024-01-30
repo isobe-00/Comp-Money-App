@@ -34,3 +34,7 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+
+
+// users テーブルを作成(ユーザーに関する情報（名前、メールアドレス、パスワードなど）が格納)
+// up メソッドではテーブルの作成、down メソッドではテーブルの削除が定義
